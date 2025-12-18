@@ -14,13 +14,13 @@
 		96905EF65AED1B983A6B3ABC /* libPods-Procar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEBF8E8E6FB1BC6CAF49B5 /* libPods-Procar.a */; };
 		B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
-		EEE26302C51542E8A6C60BC9 /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC1C3544604490184CE4A22 /* noop-file.swift */; };
-		3108A91CE8C4427CA734659B /* FoundersGroteskBOZ-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 43665975B6B545CDA8604F01 /* FoundersGroteskBOZ-Regular.otf */; };
-		8968A5F9A51C40509A6B1F1D /* FoundersGroteskBOZ-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7511C52EEE8D4A03B06B6636 /* FoundersGroteskBOZ-Bold.otf */; };
-		4F61C69EE7EE42CFBCBFE4F5 /* FoundersGroteskXCondBOZ-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7471C2CF992F4622806B5DD8 /* FoundersGroteskXCondBOZ-Bold.otf */; };
-		66E2266335C641869A5B6430 /* FoundersGrotesk-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 80DC5A8BB5E54A5086D03A96 /* FoundersGrotesk-Regular.otf */; };
-		72C1881422C34FB28965DBF0 /* FoundersGrotesk-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5E3369DE85B741F28C7187B3 /* FoundersGrotesk-Bold.otf */; };
-		A76C4BCD0D6D45878B6B6D31 /* FoundersGroteskXCond-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5394993D0A564F018B37D625 /* FoundersGroteskXCond-Bold.otf */; };
+		C48BF956A7FB493E984834A0 /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47471AE62AAA43698AA24992 /* noop-file.swift */; };
+		77BE44BD6CC14AA2950A086B /* FoundersGroteskBOZ-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A33C763C83C94BF08054E6E6 /* FoundersGroteskBOZ-Regular.otf */; };
+		54531AA6A71347ADAEBD08A5 /* FoundersGroteskBOZ-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 38212A35FE1245679CCA5647 /* FoundersGroteskBOZ-Bold.otf */; };
+		856EDA47261A4DF9BA224D0E /* FoundersGroteskXCondBOZ-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A702A6F8F19A40E6B32C0722 /* FoundersGroteskXCondBOZ-Bold.otf */; };
+		94AD164FD9CF41D9BC553A7F /* FoundersGrotesk-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = BF1E42AACE3D48909F48AA94 /* FoundersGrotesk-Regular.otf */; };
+		8D60391BDABB4518AA6BF28A /* FoundersGrotesk-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CB65E266EAB4458C86418B2E /* FoundersGrotesk-Bold.otf */; };
+		FCD2985070C74EF796C6C772 /* FoundersGroteskXCond-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FC91B2F066C64B759AA98159 /* FoundersGroteskXCond-Bold.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,14 +37,14 @@
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-Procar/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
-		1BC1C3544604490184CE4A22 /* noop-file.swift */ = {isa = PBXFileReference; name = "noop-file.swift"; path = "Procar/noop-file.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
-		1FACCDCA1050415392EF0D52 /* Procar-Bridging-Header.h */ = {isa = PBXFileReference; name = "Procar-Bridging-Header.h"; path = "Procar/Procar-Bridging-Header.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
-		43665975B6B545CDA8604F01 /* FoundersGroteskBOZ-Regular.otf */ = {isa = PBXFileReference; name = "FoundersGroteskBOZ-Regular.otf"; path = "../assets/fonts/custom/FoundersGroteskBOZ-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		7511C52EEE8D4A03B06B6636 /* FoundersGroteskBOZ-Bold.otf */ = {isa = PBXFileReference; name = "FoundersGroteskBOZ-Bold.otf"; path = "../assets/fonts/custom/FoundersGroteskBOZ-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		7471C2CF992F4622806B5DD8 /* FoundersGroteskXCondBOZ-Bold.otf */ = {isa = PBXFileReference; name = "FoundersGroteskXCondBOZ-Bold.otf"; path = "../assets/fonts/custom/FoundersGroteskXCondBOZ-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		80DC5A8BB5E54A5086D03A96 /* FoundersGrotesk-Regular.otf */ = {isa = PBXFileReference; name = "FoundersGrotesk-Regular.otf"; path = "../assets/fonts/FoundersGrotesk-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		5E3369DE85B741F28C7187B3 /* FoundersGrotesk-Bold.otf */ = {isa = PBXFileReference; name = "FoundersGrotesk-Bold.otf"; path = "../assets/fonts/FoundersGrotesk-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		5394993D0A564F018B37D625 /* FoundersGroteskXCond-Bold.otf */ = {isa = PBXFileReference; name = "FoundersGroteskXCond-Bold.otf"; path = "../assets/fonts/FoundersGroteskXCond-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		47471AE62AAA43698AA24992 /* noop-file.swift */ = {isa = PBXFileReference; name = "noop-file.swift"; path = "Procar/noop-file.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
+		2182897E618B4DCDB47CB05B /* Procar-Bridging-Header.h */ = {isa = PBXFileReference; name = "Procar-Bridging-Header.h"; path = "Procar/Procar-Bridging-Header.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		A33C763C83C94BF08054E6E6 /* FoundersGroteskBOZ-Regular.otf */ = {isa = PBXFileReference; name = "FoundersGroteskBOZ-Regular.otf"; path = "../assets/fonts/custom/FoundersGroteskBOZ-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		38212A35FE1245679CCA5647 /* FoundersGroteskBOZ-Bold.otf */ = {isa = PBXFileReference; name = "FoundersGroteskBOZ-Bold.otf"; path = "../assets/fonts/custom/FoundersGroteskBOZ-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A702A6F8F19A40E6B32C0722 /* FoundersGroteskXCondBOZ-Bold.otf */ = {isa = PBXFileReference; name = "FoundersGroteskXCondBOZ-Bold.otf"; path = "../assets/fonts/custom/FoundersGroteskXCondBOZ-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		BF1E42AACE3D48909F48AA94 /* FoundersGrotesk-Regular.otf */ = {isa = PBXFileReference; name = "FoundersGrotesk-Regular.otf"; path = "../assets/fonts/FoundersGrotesk-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CB65E266EAB4458C86418B2E /* FoundersGrotesk-Bold.otf */ = {isa = PBXFileReference; name = "FoundersGrotesk-Bold.otf"; path = "../assets/fonts/FoundersGrotesk-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FC91B2F066C64B759AA98159 /* FoundersGroteskXCond-Bold.otf */ = {isa = PBXFileReference; name = "FoundersGroteskXCond-Bold.otf"; path = "../assets/fonts/FoundersGroteskXCond-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,8 +69,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
-				1BC1C3544604490184CE4A22 /* noop-file.swift */,
-				1FACCDCA1050415392EF0D52 /* Procar-Bridging-Header.h */,
+				47471AE62AAA43698AA24992 /* noop-file.swift */,
+				2182897E618B4DCDB47CB05B /* Procar-Bridging-Header.h */,
 			);
 			name = Procar;
 			sourceTree = "<group>";
@@ -100,7 +100,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				D65327D7A22EEC0BE12398D9 /* Pods */,
 				D7E4C46ADA2E9064B798F356 /* ExpoModulesProviders */,
-				61DBB0977C594727B3EFD437 /* Resources */,
+				975892E4D93B4C668DE9F9B4 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -149,15 +149,15 @@
 			name = ExpoModulesProviders;
 			sourceTree = "<group>";
 		};
-		61DBB0977C594727B3EFD437 /* Resources */ = {
+		975892E4D93B4C668DE9F9B4 /* Resources */ = {
 			isa = "PBXGroup";
 			children = (
-				43665975B6B545CDA8604F01 /* FoundersGroteskBOZ-Regular.otf */,
-				7511C52EEE8D4A03B06B6636 /* FoundersGroteskBOZ-Bold.otf */,
-				7471C2CF992F4622806B5DD8 /* FoundersGroteskXCondBOZ-Bold.otf */,
-				80DC5A8BB5E54A5086D03A96 /* FoundersGrotesk-Regular.otf */,
-				5E3369DE85B741F28C7187B3 /* FoundersGrotesk-Bold.otf */,
-				5394993D0A564F018B37D625 /* FoundersGroteskXCond-Bold.otf */,
+				A33C763C83C94BF08054E6E6 /* FoundersGroteskBOZ-Regular.otf */,
+				38212A35FE1245679CCA5647 /* FoundersGroteskBOZ-Bold.otf */,
+				A702A6F8F19A40E6B32C0722 /* FoundersGroteskXCondBOZ-Bold.otf */,
+				BF1E42AACE3D48909F48AA94 /* FoundersGrotesk-Regular.otf */,
+				CB65E266EAB4458C86418B2E /* FoundersGrotesk-Bold.otf */,
+				FC91B2F066C64B759AA98159 /* FoundersGroteskXCond-Bold.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -225,13 +225,13 @@
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
-				025C2FA3534043C291A094F2 /* Procar-Bridging-Header.h in Resources */,
-				3108A91CE8C4427CA734659B /* FoundersGroteskBOZ-Regular.otf in Resources */,
-				8968A5F9A51C40509A6B1F1D /* FoundersGroteskBOZ-Bold.otf in Resources */,
-				4F61C69EE7EE42CFBCBFE4F5 /* FoundersGroteskXCondBOZ-Bold.otf in Resources */,
-				66E2266335C641869A5B6430 /* FoundersGrotesk-Regular.otf in Resources */,
-				72C1881422C34FB28965DBF0 /* FoundersGrotesk-Bold.otf in Resources */,
-				A76C4BCD0D6D45878B6B6D31 /* FoundersGroteskXCond-Bold.otf in Resources */,
+				0F12CB719C514173B8CFD7D8 /* Procar-Bridging-Header.h in Resources */,
+				77BE44BD6CC14AA2950A086B /* FoundersGroteskBOZ-Regular.otf in Resources */,
+				54531AA6A71347ADAEBD08A5 /* FoundersGroteskBOZ-Bold.otf in Resources */,
+				856EDA47261A4DF9BA224D0E /* FoundersGroteskXCondBOZ-Bold.otf in Resources */,
+				94AD164FD9CF41D9BC553A7F /* FoundersGrotesk-Regular.otf in Resources */,
+				8D60391BDABB4518AA6BF28A /* FoundersGrotesk-Bold.otf in Resources */,
+				FCD2985070C74EF796C6C772 /* FoundersGroteskXCond-Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,7 +307,7 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */,
-				EEE26302C51542E8A6C60BC9 /* noop-file.swift in Sources */,
+				C48BF956A7FB493E984834A0 /* noop-file.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
