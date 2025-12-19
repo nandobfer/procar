@@ -10,13 +10,15 @@ import { AxiosError } from "axios"
 import { useNavigation } from "@react-navigation/native"
 import { StackNavigation } from "../Routes"
 
-export const useOrder = (order: Order) => {
+export const useOrder = (_order: Order) => {
+    const [order, setOrder] = useState(_order)
     const [deleting, setDeleting] = useState(false)
     const [generatingPdf, setGeneratingPdf] = useState(false)
     const [viewingMediaMenu, setViewingMediaMenu] = useState(false)
     const [gallery, setGallery] = useState(order.attachments)
     const [uploadingImages, setUploadingImages] = useState(false)
     const [status, requestPermission] = ImagePicker.useCameraPermissions()
+    const [patchingOrder, setPatchingOrder] = useState(false)
 
     const navigation = useNavigation<StackNavigation>()
     const stateName = estados.find((item) => item.value === order.customer.state)
@@ -150,6 +152,21 @@ export const useOrder = (order: Order) => {
         }
     }
 
+    const patchOrder = async (data: Partial<Order>) => {
+        if (patchingOrder) return
+        setPatchingOrder(true)
+        try {
+            const response = await api.put<Order>(`/order`, data, { params: { order_id: order.id } })
+            console.log("Order patched:", response.data)
+            setOrder(response.data)
+            return response.data
+        } catch (error) {
+            console.log("Error patching order:", error)
+        } finally {
+            setPatchingOrder(false)
+        }
+    }
+
     useEffect(() => {
         setGallery(order.attachments)
     }, [order.attachments])
@@ -173,5 +190,7 @@ export const useOrder = (order: Order) => {
         setUploadingImages,
         generatingPdf,
         generatePdf,
+        patchOrder,
+        patchingOrder,
     }
 }

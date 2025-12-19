@@ -17,7 +17,7 @@ interface ProvidersProps {
 export const Providers: React.FC<ProvidersProps> = ({ children }) => {
     return (
         <GestureHandlerRootView>
-            <PaperProvider theme={{ dark: false }}>
+            <PaperProvider theme={{ dark: false, colors: { ...DefaultTheme.colors, primary: "#426aac" } }}>
                 <NavigationContainer
                     theme={{ ...NavigationTheme, colors: { ...NavigationTheme.colors, background: DefaultTheme.colors.background } }}
                 >

@@ -6,18 +6,37 @@ import { useQuery } from "@tanstack/react-query"
 import { Order } from "../../types/server/class/Order"
 import { api } from "../../backend/api"
 import { StackNavigation } from "../../Routes"
+import { BottomNavigation } from "react-native-paper"
 
 interface HomeProps {
     navigation: StackNavigation
 }
 
 export const Home: React.FC<HomeProps> = ({ navigation }) => {
+    const [tabIndex, setTabIndex] = React.useState(0)
+    const [routes] = React.useState([
+        { key: "budgets", title: "Orçamentos", focusedIcon: "clipboard-list", unfocusedIcon: "clipboard-list-outline" },
+        { key: "orders", title: "Pedidos", focusedIcon: "archive-check", unfocusedIcon: "archive-check-outline" },
+    ])
+
     const { data, isFetching, refetch } = useQuery<Order[]>({
         initialData: [],
         queryKey: ["ordersData"],
         queryFn: async () => (await api.get("/order")).data,
         refetchOnWindowFocus: true,
     })
+
+    const Orders = () => <OrderList orders={data.filter((item) => item.type === "order")} isFetching={isFetching} refetch={refetch} type="order" />
+    const Budgets = () => <OrderList orders={data.filter((item) => item.type === "budget")} isFetching={isFetching} refetch={refetch} type="budget" />
+
+    const renderScene = BottomNavigation.SceneMap({
+        budgets: Budgets,
+        orders: Orders,
+    })
+
+    const onTabChange = (index: number) => {
+        setTabIndex(index)
+    }
 
     useFocusEffect(
         useCallback(() => {
@@ -34,5 +53,5 @@ export const Home: React.FC<HomeProps> = ({ navigation }) => {
         }, [])
     )
 
-    return <OrderList orders={data} isFetching={isFetching} refetch={refetch} />
+    return <BottomNavigation navigationState={{ index: tabIndex, routes }} onIndexChange={onTabChange} renderScene={renderScene} />
 }

@@ -13,30 +13,59 @@ import { IconedText } from "../../../components/IconedText"
 
 interface OrderCardProps {
     order: Order
-    onDelete: () => void
+    refresh: () => void
 }
 
 export const OrderCard: React.FC<OrderCardProps> = (props) => {
     const swipeableRef = useRef<Swipeable>(null)
     const totalValue = props.order.items.reduce((acc, item) => acc + item.quantity * item.unit_price, 0)
     const navigation = useNavigation<StackNavigation>()
-    const { deleteOrder, deleting } = useOrder(props.order)
+    const {  patchOrder, patchingOrder } = useOrder(props.order)
 
     const handleSwipe = async (direction: "left" | "right") => {
-        if (direction === "right") {
-            await deleteOrder()
-            props.onDelete()
-        } else {
-            navigation.navigate("OrderForm", { order: props.order })
+        if (props.order.type === "budget") {
+            if (direction === "left") {
+                await patchOrder({ type: "order" })
+                props.refresh()
+            }
+
+            if (direction === "right") {
+                navigation.navigate("OrderForm", { order: props.order })
+            }
         }
+
+        if (props.order.type === "order") {
+            if (direction === "left") {
+                navigation.navigate("OrderForm", { order: props.order })
+                // await deleteOrder()
+                // props.refresh()
+            }
+            if (direction === "right") {
+                await patchOrder({ type: "budget" })
+                props.refresh()
+            }
+        }
+
         swipeableRef.current?.close()
     }
 
     return (
         <Swipeable
             ref={swipeableRef}
-            renderLeftActions={() => <SwipedContainer label="Editar" color={colors.info} direction="left" />}
-            renderRightActions={() => <SwipedContainer label="Excluir" color={colors.error} direction="right" loading={deleting} />}
+            renderRightActions={() =>
+                props.order.type === "budget" ? (
+                    <SwipedContainer label="Editar" color={colors.info} direction="right" />
+                ) : (
+                    <SwipedContainer label="Converter em orçamento" color={colors.warning} direction="right" />
+                )
+            }
+            renderLeftActions={() =>
+                props.order.type === "budget" ? (
+                    <SwipedContainer label="Converter em pedido" color={colors.success} direction="left" loading={patchingOrder} />
+                ) : (
+                    <SwipedContainer label="Editar" color={colors.info} direction="left" />
+                )
+            }
             onSwipeableOpen={handleSwipe}
             overshootRight={false}
             overshootLeft={false}
@@ -60,9 +89,9 @@ export const OrderCard: React.FC<OrderCardProps> = (props) => {
                     {props.order.customer.name}
                 </IconedText>
 
-                {props.order.customer.cnpj && (
+                {props.order.customer.cpf_cnpj && (
                     <IconedText variant="titleMedium" icon={"domain"}>
-                        {props.order.customer.cnpj}
+                        {props.order.customer.cpf_cnpj}
                     </IconedText>
                 )}
 

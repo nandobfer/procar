@@ -1,7 +1,13 @@
+import { View } from "react-native"
 import { RectButton } from "react-native-gesture-handler"
 import { ActivityIndicator, Text } from "react-native-paper"
 
-export const SwipedContainer: React.FC<{ label: string; color: string; direction: "left" | "right", loading?: boolean }> = ({ label, color, direction, loading }) => (
+export const SwipedContainer: React.FC<{ label: string; color: string; direction: "left" | "right"; loading?: boolean }> = ({
+    label,
+    color,
+    direction,
+    loading,
+}) => (
     <RectButton
         style={{
             flex: 1,
@@ -13,7 +19,15 @@ export const SwipedContainer: React.FC<{ label: string; color: string; direction
             gap: 10,
         }}
     >
-        {loading && <ActivityIndicator color="white"  />}
-        {!loading && <Text style={{ color: "white", fontWeight: "bold" }}>{label}</Text>}
+        {loading && <ActivityIndicator color="white" />}
+        {!loading && (
+            <View style={{ alignItems: "center" }}>
+                {label.split(" ").map((word, index) => (
+                    <Text key={index} style={{ color: "white", fontWeight: "bold" }}>
+                        {word}
+                    </Text>
+                ))}
+            </View>
+        )}
     </RectButton>
 )

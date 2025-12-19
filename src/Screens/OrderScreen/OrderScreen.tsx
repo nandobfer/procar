@@ -52,7 +52,7 @@ export const OrderScreen: React.FC<OrderScreenProps> = (props) => {
 
     useLayoutEffect(() => {
         props.navigation.setOptions({
-            title: `Orçamento #${order.number}`,
+            title: `${order.type === "budget" ? "Orçamento" : "Pedido"} #${order.number}`,
             headerRight: () => <OrderMenu order={order} />,
         })
     }, [props.navigation, order])
@@ -145,9 +145,12 @@ export const OrderScreen: React.FC<OrderScreenProps> = (props) => {
                     <Divider />
 
                     {order.validity && (
-                        <IconedText icon="calendar-check" variant="titleMedium">
-                            Válido até: {new Date(order.validity).toLocaleDateString("pt-BR")}
-                        </IconedText>
+                        <>
+                            <IconedText icon="calendar-check" variant="titleMedium">
+                                Válido até: {new Date(order.validity).toLocaleDateString("pt-BR")}
+                            </IconedText>
+                            <Divider />
+                        </>
                     )}
 
                     <IconedText icon="receipt" variant="titleLarge">

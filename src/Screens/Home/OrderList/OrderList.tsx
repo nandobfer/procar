@@ -1,6 +1,6 @@
 import React from "react"
 import { FlatList, View } from "react-native"
-import { Order } from "../../../types/server/class/Order"
+import { Order, OrderType } from "../../../types/server/class/Order"
 import { OrderCard } from "./OrderCard"
 import { Button, Text, TextInput } from "react-native-paper"
 import { useFormik } from "formik"
@@ -15,6 +15,7 @@ interface OrderListProps {
     orders: Order[]
     isFetching: boolean
     refetch: () => void
+    type: OrderType
 }
 
 export const OrderList: React.FC<OrderListProps> = (props) => {
@@ -39,10 +40,10 @@ export const OrderList: React.FC<OrderListProps> = (props) => {
     return (
         <FlatList
             data={orders.sort((a, b) => Number(b.number) - Number(a.number))}
-            renderItem={({ item }) => <OrderCard order={item} onDelete={props.refetch} />}
+            renderItem={({ item }) => <OrderCard order={item} refresh={props.refetch} />}
             ListEmptyComponent={
                 <View>
-                    <Text>Nenhum pedido para mostrar</Text>
+                    <Text>Nenhum item para mostrar</Text>
                 </View>
             }
             contentContainerStyle={{ padding: 20, gap: 20 }}
@@ -60,17 +61,23 @@ export const OrderList: React.FC<OrderListProps> = (props) => {
                         right={<TextInput.Icon icon="close" onPress={() => formik.resetForm()} />}
                     />
                     {orders.length > 0 && (
-                        <Text variant="titleSmall">Arraste um pedido para a esquerda para editar e para a direita para excluir</Text>
+                        <Text variant="titleSmall">
+                            {props.type === "budget"
+                                ? "Arraste um orçamento para a esquerda para editar e para a direita para converter em pedido"
+                                : "Arraste um pedido para a esquerda para editar e para a direita para excluir"}
+                        </Text>
                     )}
 
-                    <Button
-                        mode="outlined"
-                        style={[{ borderStyle: "dashed", borderWidth: 2, borderRadius: 8 }]}
-                        labelStyle={{ paddingVertical: 20, fontSize: 20 }}
-                        onPress={() => navigation.navigate("OrderForm")}
-                    >
-                        Novo orçamento
-                    </Button>
+                    {props.type === "budget" && (
+                        <Button
+                            mode="outlined"
+                            style={[{ borderStyle: "dashed", borderWidth: 2, borderRadius: 8 }]}
+                            labelStyle={{ paddingVertical: 20, fontSize: 20 }}
+                            onPress={() => navigation.navigate("OrderForm")}
+                        >
+                            Novo orçamento
+                        </Button>
+                    )}
                 </View>
             }
         />

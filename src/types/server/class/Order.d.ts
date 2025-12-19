@@ -16,8 +16,10 @@ export interface Attachment {
     width: number;
     height: number;
 }
-export type OrderForm = Omit<WithoutFunctions<Order>, "id" | "attachments"> & {
+export type OrderType = "budget" | "order";
+export type OrderForm = Omit<WithoutFunctions<Order>, "id" | "attachments" | "type"> & {
     attachments?: Attachment[];
+    type?: OrderType;
 };
 export declare class Order {
     id: string;
@@ -28,6 +30,7 @@ export declare class Order {
     additional_charges: number;
     notes?: string;
     payment_terms?: string;
+    type: OrderType;
     attachments: Attachment[];
     items: Item[];
     customerId?: string;
