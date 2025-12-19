@@ -1,6 +1,6 @@
 import React from "react"
 import { View } from "react-native"
-import { ProgressBar, Surface, Text, TouchableRipple, useTheme } from "react-native-paper"
+import { ProgressBar, Surface, Text, useTheme } from "react-native-paper"
 import { Customer } from "../../types/server/class/Customer"
 import { CustomerSuggestionCard } from "./CustomerSuggestionCard"
 

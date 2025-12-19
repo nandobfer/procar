@@ -25,9 +25,9 @@ export const CustomerSuggestionCard: React.FC<CustomerSuggestionCardProps> = (pr
                     <IconedText variant="titleMedium" icon="card-account-details">
                         {props.customer.name}
                     </IconedText>
-                    {props.customer.cnpj && (
+                    {props.customer.cpf_cnpj && (
                         <IconedText variant="titleSmall" icon="domain">
-                            {props.customer.cnpj}
+                            {props.customer.cpf_cnpj}
                         </IconedText>
                     )}
                 </View>

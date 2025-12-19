@@ -37,7 +37,7 @@ export const NewProductButton: React.FC<NewProductButtonProps> = (props) => {
             labelStyle={[{ fontSize: 16, paddingVertical: 12 }]}
             onPress={showForm}
         >
-            Adicionar produto
+            Adicionar item
         </Button>
     )
 }

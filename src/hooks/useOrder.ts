@@ -14,13 +14,14 @@ export const useOrder = (order: Order) => {
     const [deleting, setDeleting] = useState(false)
     const [generatingPdf, setGeneratingPdf] = useState(false)
     const [viewingMediaMenu, setViewingMediaMenu] = useState(false)
-    const [gallery, setGallery] = useState(order.images)
+    const [gallery, setGallery] = useState(order.attachments)
     const [uploadingImages, setUploadingImages] = useState(false)
     const [status, requestPermission] = ImagePicker.useCameraPermissions()
 
     const navigation = useNavigation<StackNavigation>()
     const stateName = estados.find((item) => item.value === order.customer.state)
-    const totalValue = order.items.reduce((acc, item) => acc + item.quantity * item.unit_price, 0)
+    const subtotal = order.items.reduce((acc, item) => acc + item.quantity * item.unit_price, 0)
+    const total = subtotal + order.additional_charges - order.discount
 
     const uploadImages = async (images: { uri: string; mimeType?: string }[], attachments: Attachment[]) => {
         if (uploadingImages) return
@@ -32,7 +33,7 @@ export const useOrder = (order: Order) => {
             })
 
             formData.append("data", JSON.stringify(attachments))
-            const response = await api.post("/order/image", formData, {
+            const response = await api.post("/order/attachment", formData, {
                 params: { order_id: order.id },
                 headers: { "Content-Type": "multipart/form-data" },
             })
@@ -72,7 +73,7 @@ export const useOrder = (order: Order) => {
         animate()
         setGallery((prev) => prev.filter((item) => item.id !== attachment.id))
         try {
-            await api.delete("/order/image", { params: { order_id: order.id, attachment_id: attachment.id } })
+            await api.delete("/order/attachment", { params: { order_id: order.id, attachment_id: attachment.id } })
         } catch (error) {
             console.log("Error deleting image:", error)
         }
@@ -150,8 +151,8 @@ export const useOrder = (order: Order) => {
     }
 
     useEffect(() => {
-        setGallery(order.images)
-    }, [order.images])
+        setGallery(order.attachments)
+    }, [order.attachments])
 
     return {
         deleting,
@@ -166,7 +167,8 @@ export const useOrder = (order: Order) => {
         handleGalleryPress,
         handleDrawPress,
         stateName,
-        totalValue,
+        subtotal,
+        total,
         deleteImage,
         setUploadingImages,
         generatingPdf,

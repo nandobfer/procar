@@ -2,17 +2,13 @@ import { Prisma } from "@prisma/client";
 import { Customer } from "./Customer";
 import { Item } from "./Item";
 import { WithoutFunctions } from "./helpers";
+import { UploadedFile } from "express-fileupload";
 export declare const order_include: {
     customer: true;
 };
 type OrderPrisma = Prisma.OrderGetPayload<{
     include: typeof order_include;
 }>;
-export type OrderType = "budget" | "order";
-export interface DeliveryDate {
-    from: number;
-    to: number;
-}
 export interface Attachment {
     id: string;
     filename: string;
@@ -20,16 +16,19 @@ export interface Attachment {
     width: number;
     height: number;
 }
-export type OrderForm = Omit<WithoutFunctions<Order>, "id" | "images">;
+export type OrderForm = Omit<WithoutFunctions<Order>, "id" | "attachments"> & {
+    attachments?: Attachment[];
+};
 export declare class Order {
     id: string;
     number: string;
-    type: OrderType;
     order_date: number;
-    observations?: string;
+    validity?: number;
+    discount: number;
+    additional_charges: number;
+    notes?: string;
     payment_terms?: string;
-    images: Attachment[];
-    delivery_date?: DeliveryDate;
+    attachments: Attachment[];
     items: Item[];
     customerId?: string;
     customer: Customer;
@@ -42,5 +41,10 @@ export declare class Order {
     constructor(data: OrderPrisma);
     update(data: Partial<OrderForm>): Promise<this>;
     delete(): Promise<void>;
+    uploadAttachments(attachments: UploadedFile[], data: Attachment[]): Promise<this>;
+    deleteAttachment(attachment_id: string): Promise<this>;
+    getSubtotal(): number;
+    getTotal(): number;
+    exportPdf(): Promise<string>;
 }
 export {};

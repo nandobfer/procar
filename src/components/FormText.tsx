@@ -28,6 +28,7 @@ export interface FormTextProps extends TextInputProps {
     forced_error?: string
     innerLabel?: boolean
     password?: boolean
+    afterChangeText?: (text: string) => void
 }
 
 export const FormText = React.forwardRef<React.ElementRef<typeof OriginalInput>, FormTextProps>((props, ref) => {
@@ -37,6 +38,27 @@ export const FormText = React.forwardRef<React.ElementRef<typeof OriginalInput>,
 
     const [inputValue, setInputValue] = useState<string>(lodash.get(props.formik.values, props.name) || "")
     const [hiddenPassword, setHiddenPassword] = props.password ? useState(true) : useState(false)
+
+    const onChangeText = (value: string) => {
+        const callback =
+            Platform.OS === "ios"
+                ? (value: string) => {
+                      setInputValue(value)
+                      if (props.mask) {
+                          props.formik.setFieldValue(props.name, masked(value, props.mask))
+                      } else {
+                          props.formik.setFieldValue(props.name, value)
+                      }
+                  }
+                : props.onChangeText ||
+                  (props.mask
+                      ? (value) => props.formik.setFieldValue(props.name, masked(value, props.mask))
+                      : // @ts-ignore
+                        props.formik.handleChange(props.name))
+
+        callback?.(value)
+        props.afterChangeText?.(value)
+    }
 
     // Sincroniza o estado local com o valor do Formik caso este seja atualizado externamente
     useEffect(() => {
@@ -93,24 +115,7 @@ export const FormText = React.forwardRef<React.ElementRef<typeof OriginalInput>,
                                       ? masked(lodash.get(props.formik.values, props.name), props.mask)
                                       : lodash.get(props.formik.values, props.name) || "")
                         }
-                        // @ts-ignore
-
-                        onChangeText={
-                            Platform.OS === "ios"
-                                ? (value: string) => {
-                                      setInputValue(value)
-                                      if (props.mask) {
-                                          props.formik.setFieldValue(props.name, masked(value, props.mask))
-                                      } else {
-                                          props.formik.setFieldValue(props.name, value)
-                                      }
-                                  }
-                                : props.onChangeText ||
-                                  (props.mask
-                                      ? (value) => props.formik.setFieldValue(props.name, masked(value, props.mask))
-                                      : // @ts-ignore
-                                        props.formik.handleChange(props.name))
-                        }
+                        onChangeText={onChangeText}
                         onBlur={
                             // ios
                             //     ? (e) => {

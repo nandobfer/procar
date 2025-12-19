@@ -62,8 +62,8 @@ export const ProductItem: React.FC<ProductItemProps> = (props) => {
             overshootRight={false}
             overshootLeft={false}
             friction={2}
-            leftThreshold={50}
-            rightThreshold={50}
+            leftThreshold={100}
+            rightThreshold={100}
             containerStyle={{ overflow: "visible" }}
         >
             <Surface style={[{ padding: 10, borderRadius: 8, gap: 10, opacity: deleting ? 0.5 : 1 }]} pointerEvents={deleting ? "none" : "auto"}>

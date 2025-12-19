@@ -49,10 +49,10 @@ export const ProductForm: React.FC<ProductFormProps> = (props) => {
 
     return (
         <View style={[{ flex: 1, gap: 10 }]}>
-            <FormText label="Discriminação" formik={formik} name="description" />
+            <FormText label="Discriminação" formik={formik} name="description" placeholder="Nome ou descrição do produto ou serviço" />
 
             <View style={[{ flexDirection: "row", gap: 10 }]}>
-                <FormText label={"Quantidade"} name="quantity" formik={formik} flex={1} keyboardType="numeric" />
+                <FormText label={"Quantidade"} name="quantity" formik={formik} flex={1} keyboardType="numeric" placeholder="Mínimo de 1 unidade" />
                 <FormText
                     label={"Preço unitário"}
                     name="unit_price"

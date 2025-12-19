@@ -40,7 +40,8 @@ export const OrderScreen: React.FC<OrderScreenProps> = (props) => {
         viewingMediaMenu,
         setViewingMediaMenu,
         stateName,
-        totalValue,
+        subtotal,
+        total,
     } = orderHook
 
     useFocusEffect(
@@ -51,7 +52,7 @@ export const OrderScreen: React.FC<OrderScreenProps> = (props) => {
 
     useLayoutEffect(() => {
         props.navigation.setOptions({
-            title: `${order.type === "budget" ? "Orçamento" : "Pedido"} #${order.number}`,
+            title: `Orçamento #${order.number}`,
             headerRight: () => <OrderMenu order={order} />,
         })
     }, [props.navigation, order])
@@ -77,11 +78,17 @@ export const OrderScreen: React.FC<OrderScreenProps> = (props) => {
                         </IconedText>
                     </View>
 
-                    {order.customer.company_name && <Text variant="titleMedium">{order.customer.company_name}</Text>}
+                    {order.customer.cpf_cnpj && (
+                        <IconedText variant="titleMedium" icon={order.customer.cpf_cnpj.length === 18 ? "domain" : "account"}>
+                            {order.customer.cpf_cnpj}
+                        </IconedText>
+                    )}
 
-                    {order.customer.cnpj && (
-                        <IconedText variant="titleMedium" icon={"domain"}>
-                            {order.customer.cnpj}
+                    {order.customer.rg_ie && <Text variant="titleMedium">RG / Insc. Estadual: {order.customer.rg_ie}</Text>}
+
+                    {order.customer.email && (
+                        <IconedText variant="titleMedium" icon={"email"}>
+                            {order.customer.email}
                         </IconedText>
                     )}
 
@@ -91,29 +98,12 @@ export const OrderScreen: React.FC<OrderScreenProps> = (props) => {
                         </IconedText>
                     )}
 
-                    {order.customer.state_registration && <Text variant="titleMedium">Insc. Estadual: {order.customer.state_registration}</Text>}
-
                     <Divider />
 
                     <IconedText variant="titleSmall" icon="map-marker">
-                        {order.customer.street || "Localização"}
+                        {order.customer.address || "Localização"}
                     </IconedText>
                     <Text variant="titleSmall"> {[order.customer.neighborhood, order.customer.city, stateName?.label].join(", ")} </Text>
-
-                    {(order.delivery_date?.from || order.delivery_date?.to) && (
-                        <>
-                            <Divider />
-                            <IconedText icon="truck-delivery" variant="titleLarge">
-                                Entrega
-                            </IconedText>
-                        </>
-                    )}
-                    {order.delivery_date?.from && (
-                        <Text variant="titleMedium">A partir de: {new Date(order.delivery_date.from).toLocaleDateString("pt-br")}</Text>
-                    )}
-                    {order.delivery_date?.to && (
-                        <Text variant="titleMedium">Até: {new Date(order.delivery_date.to).toLocaleDateString("pt-br")}</Text>
-                    )}
 
                     <Divider />
 
@@ -144,9 +134,9 @@ export const OrderScreen: React.FC<OrderScreenProps> = (props) => {
                         </Menu>
                     </View>
 
-                    {order.observations && (
+                    {order.notes && (
                         <Text numberOfLines={4} variant="titleMedium">
-                            {order.observations}
+                            {order.notes}
                         </Text>
                     )}
 
@@ -154,11 +144,17 @@ export const OrderScreen: React.FC<OrderScreenProps> = (props) => {
 
                     <Divider />
 
+                    {order.validity && (
+                        <IconedText icon="calendar-check" variant="titleMedium">
+                            Válido até: {new Date(order.validity).toLocaleDateString("pt-BR")}
+                        </IconedText>
+                    )}
+
                     <IconedText icon="receipt" variant="titleLarge">
-                        Produtos
+                        Produtos / Serviços
                     </IconedText>
                     {order.items.length > 0 && (
-                        <Text variant="titleSmall">Arraste um produto para a esquerda para editar e para a direita para excluir</Text>
+                        <Text variant="titleSmall">Arraste um item para a esquerda para editar e para a direita para excluir</Text>
                     )}
 
                     <NewProductButton order={order} onSubmit={refetch} />
@@ -168,8 +164,17 @@ export const OrderScreen: React.FC<OrderScreenProps> = (props) => {
                 <View style={[{ gap: 10, marginBottom: 10 }]}>
                     <Divider />
 
+                    <IconedText icon="cash" variant="titleMedium">
+                        Subtotal: {currencyMask(subtotal)}
+                    </IconedText>
+                    <IconedText icon="cash-plus" variant="titleMedium">
+                        Acréscimos: {currencyMask(order.additional_charges)}
+                    </IconedText>
+                    <IconedText icon="cash-minus" variant="titleMedium">
+                        Descontos: {currencyMask(order.discount)}
+                    </IconedText>
                     <IconedText icon="cash-multiple" variant="titleLarge">
-                        {currencyMask(totalValue)}
+                        Total: {currencyMask(total)}
                     </IconedText>
                     {order.payment_terms && <Text variant="titleSmall">Condições de pagamento: {order.payment_terms}</Text>}
                 </View>
