@@ -171,6 +171,10 @@ export const useOrder = (_order: Order) => {
         setGallery(order.attachments)
     }, [order.attachments])
 
+    useEffect(() => {
+        setOrder(_order)
+    }, [_order])
+
     return {
         deleting,
         deleteOrder,

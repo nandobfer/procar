@@ -21,7 +21,7 @@ interface OrderScreenProps {
 
 export const OrderScreen: React.FC<OrderScreenProps> = (props) => {
     const {
-        data: order,
+        data: _order,
         refetch,
         isFetching,
     } = useQuery<Order>({
@@ -29,6 +29,8 @@ export const OrderScreen: React.FC<OrderScreenProps> = (props) => {
         queryFn: async () => (await api.get(`/order`, { params: { order_id: props.route.params?.order?.id } })).data,
         initialData: props.route.params?.order as Order,
     })
+
+    const order = isFetching ? props.route.params?.order! : _order
 
     const orderHook = useOrder(order)
     const {

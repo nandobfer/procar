@@ -1,97 +1,85 @@
 {
   "expo": {
-    "name": "Procar",
-    "slug": "procar",
-    "owner": "nandoburgos",
-    "scheme": "procar",
-    "version": "1.0.0",
-    "orientation": "default",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "cover",
-      "backgroundColor": "#fff"
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
+      "name": "Procar",
+      "slug": "procar",
+      "owner": "nandoburgos",
+      "scheme": "procar",
+      "version": "1.0.1",
+      "orientation": "default",
+      "icon": "./assets/icon.png",
       "userInterfaceStyle": "light",
-      "supportsTablet": false,
-      "bundleIdentifier": "dev.nandoburgos.procar",
-      "associatedDomains": [
-        "applinks:app.procar.com.br"
-      ]
-    },
-    "android": {
-      "userInterfaceStyle": "light",
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/foreground-icon.png",
-        "monochromeImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#fff"
+      "splash": {
+          "image": "./assets/splash.png",
+          "resizeMode": "cover",
+          "backgroundColor": "#fff"
       },
-      "softwareKeyboardLayoutMode": "resize",
-      "package": "dev.nandoburgos.procar",
-      "permissions": [
-        "android.permission.RECORD_AUDIO"
-      ]
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "notification": {
-      "icon": "./assets/notification-icon.png",
-      "color": "#fff"
-    },
-    "plugins": [
-      [
-        "./plugins/withDisableForcedDarkModeAndroid.js",
-        {}
-      ],
-      [
-        "./plugins/withAndroidLargeHeap.js",
-        {}
-      ],
-      [
-        "expo-image-picker",
-        {
-          "photosPermission": "The app accesses your photos to let you attach any to your orders."
-        }
-      ],
-      [
-        "expo-font",
-        {
-          "fonts": [
-            "assets/fonts/custom/FoundersGroteskBOZ-Regular.otf",
-            "assets/fonts/custom/FoundersGroteskBOZ-Bold.otf",
-            "assets/fonts/custom/FoundersGroteskXCondBOZ-Bold.otf",
-            "assets/fonts/FoundersGrotesk-Regular.otf",
-            "assets/fonts/FoundersGrotesk-Bold.otf",
-            "assets/fonts/FoundersGroteskXCond-Bold.otf"
-          ]
-        }
-      ],
-      [
-        "expo-notifications",
-        {
+      "assetBundlePatterns": ["**/*"],
+      "ios": {
+          "userInterfaceStyle": "light",
+          "supportsTablet": false,
+          "bundleIdentifier": "dev.nandoburgos.procar",
+          "associatedDomains": ["applinks:app.procar.com.br"]
+      },
+      "android": {
+          "userInterfaceStyle": "light",
+          "adaptiveIcon": {
+              "foregroundImage": "./assets/foreground-icon.png",
+              "monochromeImage": "./assets/adaptive-icon.png",
+              "backgroundColor": "#fff"
+          },
+          "softwareKeyboardLayoutMode": "resize",
+          "package": "dev.nandoburgos.procar",
+          "permissions": ["android.permission.RECORD_AUDIO"]
+      },
+      "web": {
+          "favicon": "./assets/favicon.png"
+      },
+      "notification": {
           "icon": "./assets/notification-icon.png",
           "color": "#fff"
-        }
+      },
+      "plugins": [
+          ["./plugins/withDisableForcedDarkModeAndroid.js", {}],
+          ["./plugins/withAndroidLargeHeap.js", {}],
+          [
+              "expo-image-picker",
+              {
+                  "photosPermission": "The app accesses your photos to let you attach any to your orders."
+              }
+          ],
+          [
+              "expo-font",
+              {
+                  "fonts": [
+                      "assets/fonts/custom/FoundersGroteskBOZ-Regular.otf",
+                      "assets/fonts/custom/FoundersGroteskBOZ-Bold.otf",
+                      "assets/fonts/custom/FoundersGroteskXCondBOZ-Bold.otf",
+                      "assets/fonts/FoundersGrotesk-Regular.otf",
+                      "assets/fonts/FoundersGrotesk-Bold.otf",
+                      "assets/fonts/FoundersGroteskXCond-Bold.otf"
+                  ]
+              }
+          ],
+          [
+              "expo-notifications",
+              {
+                  "icon": "./assets/notification-icon.png",
+                  "color": "#fff"
+              }
+          ],
+          [
+              "expo-build-properties",
+              {
+                  "android": {
+                      "minSdkVersion": 24
+                  }
+              }
+          ]
       ],
-      [
-        "expo-build-properties",
-        {
-          "android": {
-            "minSdkVersion": 24
+      "extra": {
+          "eas": {
+              "projectId": "079d4c8f-afa2-44dd-bcf9-34a928ab5807"
           }
-        }
-      ]
-    ],
-    "extra": {
-      "eas": {
-        "projectId": "079d4c8f-afa2-44dd-bcf9-34a928ab5807"
       }
-    }
   }
 }
