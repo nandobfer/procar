@@ -4,7 +4,7 @@ import { StackNavigation, StackRoute } from "../../Routes"
 import { useQuery } from "@tanstack/react-query"
 import { api } from "../../backend/api"
 import { Order } from "../../types/server/class/Order"
-import { ProductItem } from "./ProductItem"
+import { ProductCard } from "./ProductCard"
 import { Button, Divider, Icon, Menu, Text } from "react-native-paper"
 import { useFocusEffect } from "@react-navigation/native"
 import { IconedText } from "../../components/IconedText"
@@ -13,6 +13,7 @@ import { OrderMenu } from "./OrderMenu"
 import { NewProductButton } from "./NewProductButton"
 import { MediaList } from "./MediaList"
 import { useOrder } from "../../hooks/useOrder"
+import { useProductList } from "../../hooks/useProductList"
 
 interface OrderScreenProps {
     navigation: StackNavigation
@@ -31,20 +32,12 @@ export const OrderScreen: React.FC<OrderScreenProps> = (props) => {
     })
 
     const order = isFetching ? props.route.params?.order! : _order
+    const products = useProductList(order)
+    const total = products.subtotal + order.additional_charges - order.discount
 
     const orderHook = useOrder(order)
-    const {
-        gallery,
-        handleCameraPress,
-        handleDrawPress,
-        handleGalleryPress,
-        uploadingImages,
-        viewingMediaMenu,
-        setViewingMediaMenu,
-        stateName,
-        subtotal,
-        total,
-    } = orderHook
+    const { gallery, handleCameraPress, handleDrawPress, handleGalleryPress, uploadingImages, viewingMediaMenu, setViewingMediaMenu, stateName } =
+        orderHook
 
     useFocusEffect(
         useCallback(() => {
@@ -62,8 +55,10 @@ export const OrderScreen: React.FC<OrderScreenProps> = (props) => {
     return (
         <FlatList
             scrollEnabled={true}
-            data={order.items}
-            renderItem={({ item }) => <ProductItem product={item} onDelete={refetch} order={order} />}
+            data={products.products}
+            renderItem={({ item }) => (
+                <ProductCard product={item} onSubmit={products.insertProduct} onDelete={products.removeProduct} order={order} />
+            )}
             contentContainerStyle={{ gap: 20, padding: 20 }}
             refreshing={isFetching}
             onRefresh={refetch}
@@ -158,11 +153,11 @@ export const OrderScreen: React.FC<OrderScreenProps> = (props) => {
                     <IconedText icon="receipt" variant="titleLarge">
                         Produtos / Serviços
                     </IconedText>
-                    {order.items.length > 0 && (
+                    {products.products.length > 0 && (
                         <Text variant="titleSmall">Arraste um item para a esquerda para editar e para a direita para excluir</Text>
                     )}
 
-                    <NewProductButton order={order} onSubmit={refetch} />
+                    <NewProductButton order={order} onSubmit={products.insertProduct} />
                 </View>
             }
             ListFooterComponent={
@@ -170,7 +165,7 @@ export const OrderScreen: React.FC<OrderScreenProps> = (props) => {
                     <Divider />
 
                     <IconedText icon="cash" variant="titleMedium">
-                        Subtotal: {currencyMask(subtotal)}
+                        Subtotal: {currencyMask(products.subtotal)}
                     </IconedText>
                     <IconedText icon="cash-plus" variant="titleMedium">
                         Acréscimos: {currencyMask(order.additional_charges)}

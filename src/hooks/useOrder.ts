@@ -23,7 +23,6 @@ export const useOrder = (_order: Order) => {
     const navigation = useNavigation<StackNavigation>()
     const stateName = estados.find((item) => item.value === order.customer.state)
     const subtotal = order.items.reduce((acc, item) => acc + item.quantity * item.unit_price, 0)
-    const total = subtotal + order.additional_charges - order.discount
 
     const uploadImages = async (images: { uri: string; mimeType?: string }[], attachments: Attachment[]) => {
         if (uploadingImages) return
@@ -189,7 +188,6 @@ export const useOrder = (_order: Order) => {
         handleDrawPress,
         stateName,
         subtotal,
-        total,
         deleteImage,
         setUploadingImages,
         generatingPdf,

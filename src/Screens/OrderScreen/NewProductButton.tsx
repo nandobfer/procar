@@ -4,18 +4,19 @@ import { Button } from "react-native-paper"
 import { Order } from "../../types/server/class/Order"
 import { ProductForm } from "./ProductForm"
 import { animate } from "../../tools/animate"
+import { Item } from "../../types/server/class/Item"
 
 interface NewProductButtonProps {
-    order: Order
-    onSubmit: () => void
+    order?: Order
+    onSubmit: (item: Item) => void
 }
 
 export const NewProductButton: React.FC<NewProductButtonProps> = (props) => {
     const [showingForm, setShowingForm] = useState(false)
 
-    const finishSubmit = () => {
+    const finishSubmit = (item: Item) => {
         closeForm()
-        props.onSubmit()
+        props.onSubmit(item)
     }
 
     const showForm = () => {

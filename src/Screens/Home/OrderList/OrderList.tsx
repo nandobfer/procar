@@ -64,7 +64,7 @@ export const OrderList: React.FC<OrderListProps> = (props) => {
                         <Text variant="titleSmall">
                             {props.type === "budget"
                                 ? "Arraste um orçamento para a esquerda para editar e para a direita para converter em pedido"
-                                : "Arraste um pedido para a esquerda para editar e para a direita para excluir"}
+                                : "Arraste um pedido para a esquerda para converter em orçamento e para a direita para editar"}
                         </Text>
                     )}
 
