@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import React, { useRef, useState } from "react"
 import { View } from "react-native"
 import * as Yup from "yup"
 import { Item } from "../../types/server/class/Item"
@@ -30,6 +30,9 @@ const validation = Yup.object().shape({
 
 export const ProductForm: React.FC<ProductFormProps> = (props) => {
     const productNameRef = useRef<NativeInput>(null)
+    const inputContainerRef = useRef<View>(null)
+    const [anchorPosition, setAnchorPosition] = useState<{ top: number; left: number; width: number } | undefined>()
+    const [isFocused, setIsFocused] = useState(false)
     const initialProduct = props.product
     const order_id = props.order?.id
     const formik = useFormik<Item>({
@@ -77,12 +80,29 @@ export const ProductForm: React.FC<ProductFormProps> = (props) => {
     const clearSuggestions = () => {
         formik.setFieldValue("id", "")
         formik.setFieldValue("description", "")
-        formik.setFieldValue("unit_price", "")
+        formik.setFieldValue("unit_price", 0)
+    }
+
+    const handleLayout = () => {
+        inputContainerRef.current?.measure?.((x, y, width, height, pageX, pageY) => {
+            if (!isNaN(pageY) && !isNaN(pageX) && !isNaN(width) && !isNaN(height)) {
+                setAnchorPosition({ top: pageY + height, left: pageX, width })
+            }
+        })
+    }
+
+    const handleFocus = () => {
+        setIsFocused(true)
+        handleLayout()
+    }
+
+    const handleBlur = () => {
+        setIsFocused(false)
     }
 
     return (
         <View style={[{ flex: 1, gap: 10 }]}>
-            <View style={{ position: "relative" }}>
+            <View style={{ position: "relative" }} ref={inputContainerRef} onLayout={handleLayout}>
                 <FormText
                     label="Discriminação"
                     ref={productNameRef}
@@ -90,10 +110,17 @@ export const ProductForm: React.FC<ProductFormProps> = (props) => {
                     name="description"
                     placeholder="Nome ou descrição do produto ou serviço"
                     onSubmitEditing={() => productNameRef.current?.blur()}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
                     right={formik.values.id ? <TextInput.Icon onPress={clearSuggestions} icon={"close"} /> : undefined}
                 />
-                {productNameRef.current?.isFocused() && !formik.values.id && (
-                    <ProductsSuggestions products={products} loading={isFetchingProducts} onSelect={onSelectProductSuggestion} />
+                {isFocused && !formik.values.id && anchorPosition && debouncedProductDescription.length > 0 && (
+                    <ProductsSuggestions
+                        products={products}
+                        loading={isFetchingProducts}
+                        onSelect={onSelectProductSuggestion}
+                        anchorPosition={anchorPosition}
+                    />
                 )}
             </View>
 

@@ -1,6 +1,6 @@
 import React from "react"
 import { View } from "react-native"
-import { ProgressBar, Surface, Text, useTheme } from "react-native-paper"
+import { Portal, ProgressBar, Surface, Text, useTheme } from "react-native-paper"
 import { Item } from "../../types/server/class/Item"
 import { ProductSuggestionCard } from "./ProductSuggestionCard"
 
@@ -8,22 +8,24 @@ interface ProductsSuggestionsProps {
     products: Item[]
     loading: boolean
     onSelect: (product: Item) => void
+    anchorPosition?: { top: number; left: number; width: number }
 }
 
 export const ProductsSuggestions: React.FC<ProductsSuggestionsProps> = (props) => {
     const theme = useTheme()
 
-    return (
+    const content = (
         <Surface
             style={{
                 position: "absolute",
-                top: 70,
-                width: "100%",
+                top: props.anchorPosition ? props.anchorPosition.top : 70,
+                left: props.anchorPosition?.left,
+                width: props.anchorPosition?.width || "100%",
                 backgroundColor: theme.colors.elevation.level5,
                 borderRadius: 8,
                 paddingVertical: 10,
-                zIndex: 90,
-                elevation: 90
+                zIndex: 9999,
+                elevation: 24,
             }}
         >
             <View
@@ -49,4 +51,7 @@ export const ProductsSuggestions: React.FC<ProductsSuggestionsProps> = (props) =
             ))}
         </Surface>
     )
+
+    // Use Portal to render outside FlatList's stacking context
+    return props.anchorPosition ? <Portal>{content}</Portal> : content
 }
